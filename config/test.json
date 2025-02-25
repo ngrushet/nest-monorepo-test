@@ -1,0 +1,18 @@
+{
+    "app1": {
+        "enabled": true,
+        "config": {}
+    },
+    "app2": {
+        "enabled": false,
+        "config": {}
+    },
+    "library1": {
+        "enabled": false,
+        "config": {}
+    },
+    "library2": {
+        "enabled": true,
+        "config": {}
+    }
+}
