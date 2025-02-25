@@ -15,7 +15,7 @@ export class App2Module {
         },
         App2Service
       ],
-      exports: ['App2_CONFIG'],
+      exports: [App2Service],
     };
   }
 }

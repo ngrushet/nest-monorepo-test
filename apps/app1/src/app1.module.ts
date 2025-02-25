@@ -1,20 +1,23 @@
+import { Module, DynamicModule } from '@nestjs/common';
 import { App1Controller } from './app1.controller';
 import { App1Service } from './app1.service';
-import { Module, DynamicModule } from '@nestjs/common';
+import { ConfigModule } from 'apps/monorepo/src/config/config.module';
 
 @Module({})
 export class App1Module {
   static forRoot(config: any): DynamicModule {
+    const providers = [
+      App1Service,
+    ];
+
+    const controllers = [App1Controller];
+
     return {
+      imports: [ConfigModule],
       module: App1Module,
-      controllers: [App1Controller],
-      providers: [
-        {
-          provide: 'APP1_CONFIG',
-          useValue: config,
-        },
-        App1Service
-      ],
+      providers,
+      controllers,
+      exports: providers,
     };
   }
 }

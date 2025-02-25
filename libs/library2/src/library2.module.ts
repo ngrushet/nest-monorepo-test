@@ -8,7 +8,7 @@ export class Library2Module {
       module: Library2Module,
       providers: [
         {
-          provide: 'LIBRARY1_CONFIG',
+          provide: 'LIBRARY2_CONFIG',
           useValue: config, // Передаем конфиг в модуль
         },
         Library2Service

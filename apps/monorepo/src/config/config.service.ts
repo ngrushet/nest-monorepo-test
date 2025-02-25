@@ -1,15 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs';
+
+let _instance: any | null = null;
 
 @Injectable()
 export class ConfigService {
-  private readonly config: any;
+    private instance: any;
 
-  constructor(configPath: string) {
-    this.config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  }
+    public constructor() {
+        this.instance = ConfigService.instance();
+    }
 
-  getConfig() {
-    return this.config;
-  }
+    public get(): any {
+        return this.instance;
+    }
+
+    public static initialized(): boolean {
+        return !!_instance;
+    }
+
+    public static instance() {
+        if (!ConfigService.initialized()) {
+            throw new Error('Configuration is not initialized');
+        }
+        return _instance!;
+    }
+
+    public static set(instance: any): void {
+        if (ConfigService.initialized()) {
+            throw new Error('Configuration is already initialized');
+        }
+        if (!instance) {
+            throw new Error('Bad configuration instance passed');
+        }
+        _instance = instance;
+    }
 }
